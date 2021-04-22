@@ -11,7 +11,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "./src/*.{css,less,html,htm,vue}": [
+    "./src/*.{css,less,scss,styl,html,htm,vue}": [
       "stylelint --fix"
     ],
     "./src/*.{vue,js,ts}": [
@@ -22,9 +22,9 @@
   "dependencies": {
     "core-js": "^3.8.3",
     "good-storage": "^1.1.1",
-    "vue": "^2.6.11",
+    "vue": "2.6.11",
     "vue-router": "^3.5.1",
-    "vue-template-compiler": "^2.6.11",
+    "vue-template-compiler": "2.6.11",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.0.0-beta.3"
   },
@@ -53,7 +53,6 @@
     "stylelint": "^13.12.0",
     "stylelint-config-recess-order": "^2.4.0",
     "stylelint-config-standard": "^21.0.0",
-    "stylelint-selector-bem-pattern": "^2.1.0",
     "stylelint-webpack-plugin": "^2.1.1"
   },
   "eslintConfig": {

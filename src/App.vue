@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
-    <div class="form-class"></div>
+    <div class="form-class a1sd--213--asdas-123"></div>
   </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
   color: red;
 }
 
-.asd {
+.a1sd--213--asdas-123 {
   color: blue;
 }
 </style>

@@ -1,12 +1,13 @@
 {
   "name": "app-test",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "qa": "npm run lint && vue-cli-service build --mode qa",
     "build": "npm run lint && vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "commit": "",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "prepare": "husky install"
   },
@@ -36,6 +37,7 @@
     "axios": "^0.21.1",
     "commitlint": "^12.1.1",
     "conventional-changelog-cli": "^2.1.1",
+    "cz-customizable": "^6.3.0",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.2.0",
@@ -60,6 +62,11 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {}
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
   },
   "browserslist": [
     "> 1%",

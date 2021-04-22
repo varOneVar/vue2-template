@@ -1,3 +1,4 @@
+const StyleLintPlugin = require('stylelint-webpack-plugin')
 const { name } = require('./package.json')
 
 module.exports = {
@@ -68,5 +69,16 @@ module.exports = {
     config.output.library = `${name}-[name]`
     // eslint-disable-next-line no-param-reassign
     config.output.libraryTarget = 'umd'
+  },
+  chainWebpack: (config) => {
+    config.plugin('stylelint').use(StyleLintPlugin, [
+      {
+        // 指定检测的文件
+        files: ['./src/**/*.{vue,css,less}'],
+        // 启动自动修复
+        fix: true,
+        cache: true // 启用缓存
+      }
+    ])
   }
 }

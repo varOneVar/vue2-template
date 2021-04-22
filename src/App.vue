@@ -23,11 +23,14 @@ export default {
 
 <style>
 #app {
+  width: 100%;
+  height: 80px;
+  padding: 20px;
+  margin-top: 60px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+  text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

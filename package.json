@@ -7,11 +7,13 @@
     "qa": "npm run lint && vue-cli-service build --mode qa",
     "build": "npm run lint && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "commit": "",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "prepare": "husky install"
   },
   "lint-staged": {
+    "./src/*.{css,less,html,htm,vue}": [
+      "stylelint --fix"
+    ],
     "./src/*.{vue,js,ts}": [
       "vue-cli-service lint",
       "eslint --fix"
@@ -47,7 +49,11 @@
     "eslint-plugin-vue": "^7.9.0",
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "stylelint": "^13.12.0",
+    "stylelint-config-recess-order": "^2.4.0",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-webpack-plugin": "^2.1.1"
   },
   "eslintConfig": {
     "root": true,
@@ -56,7 +62,8 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:prettier/recommended"
     ],
     "parserOptions": {
       "parser": "@babel/eslint-parser"

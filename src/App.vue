@@ -2,6 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="form-class"></div>
   </div>
 </template>
 
@@ -32,5 +33,13 @@ export default {
   text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.form-class {
+  color: red;
+}
+
+.asd {
+  color: blue;
 }
 </style>

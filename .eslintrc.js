@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-20 10:53:34
- * @LastEditTime: 2021-04-22 18:12:54
+ * @LastEditTime: 2021-04-23 17:38:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \app-test\.eslintrc.js
@@ -28,7 +28,8 @@ module.exports = {
     'import/no-absolute-path': 'off',
     'import/no-extraneous-dependencies': 'off',
     'vue/no-multiple-template-root': 'off',
-    'no-underscore-dangle': 'allow',
+    'no-unused-expressions': 0,
+    'no-underscore-dangle': 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-console': process.env.NODE_ENV === 'production' ? { allow: ['warn', 'error'] } : 0,
     'vue/order-in-components': [

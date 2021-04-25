@@ -1,9 +1,9 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-04-22 15:50:04
- * @LastEditTime: 2021-04-22 16:05:08
+ * @LastEditTime: 2021-04-25 17:04:48
  * @LastEditor: Song Qing
- * @Description:
+ * @Description: 错误代码
  * @FilePath: \app-test\src\api\api-error.js
  */
 export const errors = [

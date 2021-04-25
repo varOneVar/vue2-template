@@ -38,6 +38,7 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "axios": "^0.21.1",
+    "axios-mock-adapter": "^1.19.0",
     "commitlint": "^12.1.1",
     "conventional-changelog-cli": "^2.1.1",
     "cz-customizable": "^6.3.0",

@@ -5,7 +5,24 @@ import { getUrlQuery } from '@/utils'
 // import storage from 'good-storage'
 
 import cancelRepeatRequest from './api-cancel'
+import retryAdapterEnhancer from './api-again'
+import cacheAdapterEnhancer from './api-cache'
+import { createAdapterMiddleareModel } from './handlers'
 
+const APP = createAdapterMiddleareModel()
+APP.use(
+  // 断线重连
+  retryAdapterEnhancer({
+    times: 3,
+    delay: 300
+  })
+)
+APP.use(
+  // 数据缓存
+  cacheAdapterEnhancer({
+    maxAge: 2 * 60 * 1000 // 缓冲有效期（ms）
+  })
+)
 // 获取参数
 function getParams(config) {
   const obj = {
@@ -35,7 +52,8 @@ function createService() {
 
   const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
-    timeout: 60000
+    timeout: 60000,
+    adapter: APP.listen(axios.defaults.adapter)
   })
   // 请求拦截
   service.interceptors.request.use(

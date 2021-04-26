@@ -15,7 +15,6 @@ module.exports = {
         severity: 'warning'
       }
     ],
-    'at-rule-no-unknown': true,
-    'scss/at-rule-no-unknown': true
+    'at-rule-no-unknown': true
   }
 }

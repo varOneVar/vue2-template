@@ -4,17 +4,17 @@ import qs from 'query-string'
 import { getUrlQuery } from '@/utils'
 // import storage from 'good-storage'
 
-import cancelRepeatRequest from './api-cancel'
 import retryAdapterEnhancer from './api-again'
 import cacheAdapterEnhancer from './api-cache'
+import cancelRepeatRequestBase from './api-cancel'
 import { createAdapterMiddleareModel } from './handlers'
 
 const APP = createAdapterMiddleareModel()
 APP.use(
-  // 断线重连
+  // 断线重连, 延时时间每次翻倍
   retryAdapterEnhancer({
     times: 3,
-    delay: 300
+    delay: 1000
   })
 )
 APP.use(
@@ -48,28 +48,30 @@ function getParams(config) {
 // 创建请求实例
 function createService() {
   // 取消重复请求
-  const cancelRequest = cancelRepeatRequest()
-
+  const cancelRequest = cancelRepeatRequestBase()
+  const adapter = APP.listen(axios.defaults.adapter)
   const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
-    timeout: 60000,
-    adapter: APP.listen(axios.defaults.adapter)
+    timeout: 60000 * 3,
+    adapter // 适配器触发在顺序： 请求拦截器 -- 适配器 -- 响应拦截器
   })
   // 请求拦截
   service.interceptors.request.use(
     (config) => {
-      // checkTimeout()
       const params = getParams(config)
-      // 取消重复请求
       if (params.noCancel) {
         delete params.noCancel
       } else {
-        cancelRequest.remove(config, params)
-        cancelRequest.add(config, params)
+        cancelRequest.remove(config)
+        cancelRequest.add(config)
       }
+      // checkTimeout()
+      // const params = getParams(config)
+      console.log('请求拦截器')
       return config
     },
     (error) => {
+      console.log('请求异常', error)
       // TODO: 错误弹窗
       // Message({
       //   message: `请求异常 ${error.message}`,
@@ -82,16 +84,11 @@ function createService() {
   // 响应拦截器
   service.interceptors.response.use(
     async (response) => {
-      const {
-        headers,
-        config,
-        data,
-        data: { code, error }
-      } = response
+      const { headers, data, config } = response
       // 取消重复请求
       cancelRequest.remove(config)
       // 处理blob数据
-      if (config.responseType === 'blob' || headers['content-disposition']) {
+      if (config.responseType === 'blob' || (headers && headers['content-disposition'])) {
         if (config.filetype === 'pdf') {
           return data
         }
@@ -101,35 +98,10 @@ function createService() {
       if (typeof data !== 'object') {
         return response
       }
-      // 有些接口返回的是error
-      if (code === undefined) {
-        // 有些接口返回的是字符串，没有状态
-        if (error === undefined) return response
-        // 0代表修改， 100代表新增
-        if (error === 0 || error === 100) {
-          data.code = '0'
-          data.result = data.data
-        } else {
-          // TODO: 错误弹窗
-          // Message({
-          //   message: data.msg || data.data,
-          //   type: 'error',
-          //   duration: 3 * 1000
-          // })
-        }
-        return data
-      }
-      if (!(code === '0' || code === 0)) {
-        // TODO: 错误弹窗
-        // Message({
-        //   message: getMessage(code, message || result),
-        //   type: 'error',
-        //   duration: 3 * 1000
-        // })
-      }
       return data
     },
     (error) => {
+      console.log('响应错误', error)
       let code = ''
       if (error.response) {
         code = error.response.status

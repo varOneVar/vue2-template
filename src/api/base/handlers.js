@@ -1,16 +1,18 @@
+/* eslint-disable no-param-reassign */
 /*
  * @Author: Song Qing
  * @Date: 2021-04-25 15:53:17
- * @LastEditTime: 2021-04-25 17:09:39
+ * @LastEditTime: 2021-04-26 15:42:21
  * @LastEditor: Song Qing
  * @Description: 接口的辅助函数
- * @FilePath: \app-test\src\api\handlers.js
+ * @FilePath: \app-test\src\api\base\handlers.js
  */
 
 /**
  * 生成请求的key，来判断是否重复请求或者数据缓存
  * @param {objecy} config axios的config
  */
+
 export function generateReqKey(config) {
   const { method, url, params, data } = config
   return [method, url, JSON.stringify(params), JSON.stringify(data)].join('&')
@@ -30,10 +32,14 @@ export function compose(middleware, adapter) {
     // last called middleware #
     let index = -1
     function dispatch(i) {
+      console.log(i, index, middleware.length, 'composeExec')
       if (i <= index) return Promise.reject(new Error('next() called multiple times'))
       index = i
       let fn = middleware[i]
-      if (i === middleware.length) fn = next
+      if (i === middleware.length) {
+        index = -1 // 不重置会影响断线重连逻辑
+        fn = next
+      }
       if (!fn) return adapter(context)
       try {
         return Promise.resolve(fn(context, dispatch.bind(null, i + 1)))
@@ -44,6 +50,9 @@ export function compose(middleware, adapter) {
     return dispatch(0)
   }
 }
+/**
+ * 收集触发适配器 OLOO
+ */
 const adapterMiddleareModel = {
   use(fn) {
     if (!this.middleware) {
@@ -59,16 +68,18 @@ const adapterMiddleareModel = {
         return await fnMiddleware(config)
       } catch (error) {
         console.error(error)
-        return null
+        return Promise.reject(error)
       }
     }
   }
 }
-
 export function createAdapterMiddleareModel() {
   return Object.create(adapterMiddleareModel)
 }
 
+/**
+ * 数据缓存 OLOO
+ */
 const MemoryCache = {
   set(key, value, maxAge) {
     if (!this.data) {

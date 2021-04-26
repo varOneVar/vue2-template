@@ -1,5 +1,6 @@
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const { name } = require('./package.json')
+const mockApi = require('./mock/index.js')
 
 module.exports = {
   publicPath: process.env.VUE_APP_PUBLIC_PATH,
@@ -38,9 +39,8 @@ module.exports = {
     port: 3999,
     https: false,
     hotOnly: true,
-    // headers: {
-    // 	'Access-Control-Allow-Origin': '*'
-    // },
+    // proxy: 'https://aloha-qa.walmartmobile.cn',
+    before: mockApi,
     // 查阅 https://github.com/vuejs/vue-doc-zh-cn/vue-cli/cli-service.md#配置代理
     // proxy: {
     //   '/user-center': {

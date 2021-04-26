@@ -1,14 +1,14 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-04-23 17:08:37
- * @LastEditTime: 2021-04-25 17:36:22
+ * @LastEditTime: 2021-04-26 15:44:10
  * @LastEditor: Song Qing
  * @Description: 缓存请求数据
- * @FilePath: \app-test\src\api\api-cache.js
+ * @FilePath: \app-test\src\api\base\api-cache.js
  */
 import { generateReqKey, createMemoryCache } from './handlers'
 
-function cacheAdapterEnhancer(options) {
+function cacheAdapterEnhancer(options = {}) {
   const {
     maxAge, // 缓存有效期
     enabledByDefault = true, // 默认是否使用缓存
@@ -16,7 +16,7 @@ function cacheAdapterEnhancer(options) {
     defaultCache = createMemoryCache() // 默认缓存对象
   } = options
 
-  return (config, next) => {
+  return async (config, next) => {
     const { method, forceUpdate } = config
     const useCache = config[cacheFlag] != null ? config[cacheFlag] : enabledByDefault
     // 如果是get请求且使用缓存， post请求一般是上传，不予处理
@@ -31,7 +31,7 @@ function cacheAdapterEnhancer(options) {
             return await next(config) // 使用默认的xhrAdapter发送请求
           } catch (reason) {
             defaultCache.delete(requestKey)
-            throw reason
+            return Promise.reject(reason)
           }
         })()
         defaultCache.set(requestKey, responsePromise, maxAge) // 保存请求返回的响应对象

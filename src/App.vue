@@ -3,18 +3,37 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <div class="form-class a1sd--213--asdas-123"></div>
+    <button class="btn" @click="testHandler">get请求函数</button>
+    <button class="btn" @click="testHandler1">post请求函数</button>
   </div>
 </template>
 
 <script>
+import { apiArticleList } from '@/api/jobs/pages'
+import { apiUseLogin } from '@/api/jobs/user'
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   methods: {
-    testHandler() {
-      console.log(1)
+    async testHandler1() {
+      const res = await apiUseLogin({
+        userName: 'admin',
+        password: '123456'
+      })
+      console.log('结果', res)
+    },
+    async testHandler() {
+      const res = await apiArticleList({
+        page: 1,
+        limit: 10
+      })
+      console.log('结果', res)
     }
+  },
+  created() {
+    this.testHandler()
+    this.testHandler1()
   },
   components: {
     HelloWorld

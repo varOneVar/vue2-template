@@ -1,3 +1,12 @@
+## [0.2.4](/compare/v0.2.3...v0.2.4) (2021-06-15)
+
+
+### Features
+
+* **components): feat(env): docs(env:** 测试 a42e672
+
+
+
 ## [0.2.3](/compare/v0.2.1...v0.2.3) (2021-06-15)
 
 

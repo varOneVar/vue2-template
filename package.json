@@ -1,6 +1,6 @@
 {
   "name": "app-test",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -45,7 +45,6 @@
     "chokidar": "^3.5.1",
     "commitlint": "^12.1.1",
     "conventional-changelog-cli": "^2.1.1",
-    "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^6.3.0",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",

@@ -170,7 +170,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .canvas {
-  // width: 100%;
-  // height: 400px;
+  width: 100%;
+  height: 400px;
+  padding: 0;
 }
 </style>

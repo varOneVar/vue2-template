@@ -1,6 +1,6 @@
 {
   "name": "app-test",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,6 +8,7 @@
     "build": "npm run lint && vue-cli-service build",
     "lint": "vue-cli-service lint",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "cz": "./node_modules/.bin/cz-customizable",
     "prepare": "husky install"
   },
   "lint-staged": {
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@babel/eslint-plugin": "^7.14.5",
     "@commitlint/cli": "^12.1.1",
     "@commitlint/config-conventional": "^12.1.1",
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -61,21 +63,6 @@
     "stylelint-config-recess-order": "^2.4.0",
     "stylelint-config-standard": "^21.0.0",
     "stylelint-webpack-plugin": "^2.1.1"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended",
-      "plugin:prettier/recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
   },
   "config": {
     "commitizen": {

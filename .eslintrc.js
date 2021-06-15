@@ -1,12 +1,15 @@
 /*
  * @Author: your name
  * @Date: 2021-04-20 10:53:34
- * @LastEditTime: 2021-04-23 17:38:07
+ * @LastEditTime: 2021-06-15 11:35:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \app-test\.eslintrc.js
+ * @FilePath: \mobile-vue-vant\app-test\.eslintrc.js
  */
+const path = require('path')
+
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es2021: true
@@ -17,11 +20,15 @@ module.exports = {
     'plugin:prettier/recommended' // 添加 prettier 插件
   ],
   parserOptions: {
+    parser: '@babel/eslint-parser',
     ecmaVersion: 12,
     sourceType: 'module',
-    parser: '@babel/eslint-parser'
+    babelOptions: {
+      configFile: path.resolve(__dirname, './babel.config.js')
+    }
+    // parser: '@babel/eslint-parser'
   },
-  plugins: ['vue', 'html'],
+  plugins: ['vue', 'html', '@babel'],
   rules: {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',

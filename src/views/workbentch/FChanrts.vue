@@ -8,7 +8,8 @@
 export default {
   data() {
     return {
-      context: null
+      context: null,
+      count: 1
     }
   },
   methods: {

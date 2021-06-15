@@ -12,6 +12,8 @@
 
 
 #### 提交git代码暂存区需要使用 package.json的cz命令，因为有对注释格式的校验，cz命令会格式化注释
-git add .
-yarn cz
-git push
+~~~bash
+  git add .
+  yarn cz
+  git push
+~~~

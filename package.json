@@ -10,7 +10,8 @@
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "cz": "./node_modules/.bin/cz-customizable",
     "prepare": "husky install",
-    "push": "winpty sh git.sh"
+    "git-push": "winpty sh git.sh",
+    "vs-push": "sh git.sh"
   },
   "lint-staged": {
     "./src/*.{css,less,scss,styl,html,htm,vue}": [

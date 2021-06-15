@@ -16,4 +16,7 @@
   git add .
   yarn cz
   git push
+  # 或者在vscode里调用 yarn vs-push
+  # 使用git工具调用 yarn git-push
+  # 区别在于git工具不是交互式命令，需要在命令前添加winpty来使用交互式命令行， vscode直接可以交互式，调用winpty会报错
 ~~~

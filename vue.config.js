@@ -7,17 +7,9 @@ module.exports = {
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
-  productionSourceMap: false,
-  runtimeCompiler: true,
-  filenameHashing: true,
+  productionSourceMap: process.env.NODE_ENV !== 'production', // 生产环境的SourceMap
   // CSS 相关选项
   css: {
-    // 将组件内的 CSS 提取到一个单独的 CSS 文件 (只用在生产环境中)
-    extract: true,
-
-    // 是否开启 CSS source map？
-    sourceMap: false
-
     // // 为预处理器的 loader 传递自定义选项。比如传递给
     // // sass-loader 时，使用 `{ sass: { ... } }`。
     // loaderOptions: {

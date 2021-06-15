@@ -15,6 +15,6 @@ module.exports = {
         severity: 'warning'
       }
     ],
-    'at-rule-no-unknown': true
+    'at-rule-no-unknown': null
   }
 }

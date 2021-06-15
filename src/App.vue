@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <div class="form-class a1sd--213--asdas-123"></div>
+    <FChanrts />
+    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+    <!-- <div class="form-class a1sd--213--asdas-123"></div> -->
     <button class="btn" @click="testHandler">get请求函数</button>
     <button class="btn" @click="testHandler1">post请求函数</button>
   </div>
@@ -11,7 +12,7 @@
 <script>
 import { apiArticleList } from '@/api/jobs/pages'
 import { apiUseLogin } from '@/api/jobs/user'
-import HelloWorld from './components/HelloWorld.vue'
+import FChanrts from '@/views/workbentch/FChanrts'
 
 export default {
   name: 'App',
@@ -36,7 +37,7 @@ export default {
     this.testHandler1()
   },
   components: {
-    HelloWorld
+    FChanrts
   }
 }
 </script>

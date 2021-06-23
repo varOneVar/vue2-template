@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-20 10:53:34
- * @LastEditTime: 2021-06-15 11:35:50
+ * @LastEditTime: 2021-06-18 16:59:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \mobile-vue-vant\app-test\.eslintrc.js
@@ -30,6 +30,7 @@ module.exports = {
   },
   plugins: ['vue', 'html', '@babel'],
   rules: {
+    'no-param-reassign': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/no-absolute-path': 'off',

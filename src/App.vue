@@ -1,65 +1,68 @@
 <template>
   <div id="app">
-    <FChanrts />
-    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <!-- <div class="form-class a1sd--213--asdas-123"></div> -->
-    <button class="btn" @click="testHandler">get请求函数</button>
-    <button class="btn" @click="testHandler1">post请求函数</button>
+    <div class="test she c-red" v-clickoutside="handler">测试clickoutside指令</div>
+    <p>{{ 123213 | numberAddThousands }}</p>
+    <router-view v-loading="wholePageLoading" />
   </div>
 </template>
 
 <script>
-import { apiArticleList } from '@/api/jobs/pages'
-import { apiUseLogin } from '@/api/jobs/user'
-import FChanrts from '@/views/workbentch/FChanrts'
+import { mapGetters, mapActions } from 'vuex'
+import device from 'current-device'
 
 export default {
   name: 'App',
   methods: {
-    async testHandler1() {
-      const res = await apiUseLogin({
-        userName: 'admin',
-        password: '123456'
-      })
-      console.log('结果', res)
+    handler() {
+      console.log('很棒')
     },
-    async testHandler() {
-      const res = await apiArticleList({
-        page: 1,
-        limit: 10
+    initHandler() {
+      this.listenerDocumentClick()
+      this.getDeviceInfo()
+    },
+    // 获取设备信息
+    getDeviceInfo() {
+      console.log('', device, device.mobile())
+      this.toggleDevice(device)
+      device.onChangeOrientation((e) => {
+        console.log('监听屏幕转向', e)
       })
-      console.log('结果', res)
-    }
+    },
+    // 监听docuemnt点击，记录点击路径
+    listenerDocumentClick() {
+      // TODO: 过滤数组，形成一个冒泡dom链条，需要记录某些点击触发，可以设定一些特殊的classname在dom，记录点击
+      // 在路由守卫里可以记录时间，from - to -Date.now(),可以记录用户在页面停留时间
+      // 通过轮询，对比时间，可以观察用户是否在当前页面存在操作，就像斗鱼的监测用户是否还在观看来关闭直播节流
+      function documentClickHandler(e) {
+        const ev = window.event || e
+        const path = ev.path || (ev.composedPath && ev.composedPath())
+        console.log('点击dom链条', path, typeof path)
+        e.stopPropagation()
+      }
+      document.addEventListener('click', documentClickHandler, false)
+      this.$once('hook:beforeDestroy', function beforeDestroyHandler() {
+        document.removeEventListener('click', documentClickHandler, false)
+      })
+    },
+    ...mapActions('app', ['toggleDevice'])
   },
   created() {
-    this.testHandler()
-    this.testHandler1()
+    this.initHandler()
   },
-  components: {
-    FChanrts
+  computed: {
+    ...mapGetters(['wholePageLoading'])
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  width: 100%;
-  height: 80px;
-  padding: 20px;
-  margin-top: 60px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  text-align: center;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
-.form-class {
-  color: red;
-}
-
-.a1sd--213--asdas-123 {
-  color: blue;
+.test {
+  width: 200px;
+  height: 200px;
+  background: $--color-primary;
 }
 </style>

@@ -1,13 +1,14 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-04-25 18:04:22
- * @LastEditTime: 2021-04-26 17:09:55
+ * @LastEditTime: 2021-06-18 14:24:52
  * @LastEditor: Song Qing
  * @Description: 用户相关接口
- * @FilePath: \app-test\src\api\jobs\user.js
+ * @FilePath: \mobile-vue-vant\app-test\src\api\jobs\user.js
  */
-import { __post } from '@/api/base/api-interceptor'
+import service from '@/api/base/api-interceptor'
 
+const { __post } = service
 const prefix = '/mock-server/user'
 export const apiUseLogin = (args) =>
   __post(`${prefix}/login`, args, {

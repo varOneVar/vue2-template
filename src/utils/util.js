@@ -115,25 +115,3 @@ export const objOrArrPointPath = (data, path, def) => {
     return def
   }
 }
-
-/**
- * 对地址处理获取参数对象
- * @param {String} url url或类似url的字符串，需要带?号
- */
-export const getUrlQuery = (url) => {
-  if (typeof url !== 'string') {
-    throw Error('getUrlQuery：只接受字符串参数')
-  }
-  try {
-    const paramsArr = decodeURIComponent(url).split('?')[1].split('&')
-    const obj = {}
-    paramsArr.forEach((vi) => {
-      const [key, value] = vi.split('=')
-      obj[key] = value
-    })
-    return obj
-  } catch (error) {
-    console.error(error)
-    return {}
-  }
-}

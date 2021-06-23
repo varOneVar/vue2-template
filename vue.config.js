@@ -9,17 +9,15 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: process.env.NODE_ENV !== 'production', // 生产环境的SourceMap
   // CSS 相关选项
-  css: {
-    // // 为预处理器的 loader 传递自定义选项。比如传递给
-    // // sass-loader 时，使用 `{ sass: { ... } }`。
-    // loaderOptions: {
-    // 	sass: {
-    // 		prependData: [
-    // 			`@import "~@/styles/utils.scss";`
-    // 		].join('\n')
-    // 	}
-    // },
-  },
+  // css: {
+  //   // // 为预处理器的 loader 传递自定义选项。比如传递给
+  //   // // sass-loader 时，使用 `{ sass: { ... } }`。
+  //   loaderOptions: {
+  //     scss: {
+  //       additionalData: `@import "~@/styles/element-variables.scss";`
+  //     }
+  //   }
+  // },
 
   // arallel: require('os').cpus().length > 1,
 
@@ -61,8 +59,27 @@ module.exports = {
     config.output.library = `${name}-[name]`
     // eslint-disable-next-line no-param-reassign
     config.output.libraryTarget = 'umd'
+    if (process.env.NODE_ENV !== 'production') {
+      // 调试显示错误位置
+      config.devtool = 'eval-source-map'
+    }
+    config.resolve.fallback = {
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify')
+    }
   },
   chainWebpack: (config) => {
+    const oneOfsMap = config.module.rule('scss').oneOfs.store
+    oneOfsMap.forEach((item) => {
+      item
+        .use('sass-resources-loader')
+        .loader('sass-resources-loader')
+        .options({
+          // 全局变量文件路径，支持string和array，全局文件无需引入变量文件即可使用变量
+          resources: ['./src/styles/element-variables.scss']
+        })
+        .end()
+    })
     config.plugin('stylelint').use(StyleLintPlugin, [
       {
         // 指定检测的文件

@@ -1,12 +1,17 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-04-22 15:39:06
- * @LastEditTime: 2021-04-22 15:40:13
+ * @LastEditTime: 2021-06-23 11:25:27
  * @LastEditor: Song Qing
- * @Description:
- * @FilePath: \app-test\src\utils\download.js
+ * @Description: 文件下载
+ * @FilePath: \mobile-vue-vant\app-test\src\utils\download.js
  */
 
+/**
+ * 将接口返回的数据下载
+ * @param {ajax response} data 要下载的数据
+ * @param {string} fileName 文件名
+ */
 export default function download(data, fileName) {
   const filename =
     fileName || data.headers['content-disposition'].replace('attachment; filename=', '')

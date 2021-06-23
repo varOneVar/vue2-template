@@ -1,0 +1,37 @@
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import '~element-ui/packages/theme-chalk/src/index';
+
+/* theme color */
+$--color-primary: #0071ce;
+$--color-success: #2a8703;
+$--color-warning: #ec8131;
+$--color-danger: #ff4949;
+$--color-info: #cecece;
+
+$--color-text-primary: #282828;
+$--color-text-regular: #5d5d5d;
+$--color-text-secondary: #9a9a9a;
+$--color-text-placeholder: #cecece;
+
+$--border-color-base: #cecece;
+$--border-color-lighter: #ececec;
+$--border-color-lighter: #f3f3f3;
+$--border-color-extra-light: #f8f8f8;
+
+$--color-white: #fff;
+$--color-black: #282828;
+$--background-color-base: #f5f7fa;
+
+$--table-border: 1px solid #cecece;
+$--button-font-weight: 400;
+
+:export {
+  ex-theme: $--color-primary;
+  ex-primary: $--color-primary;
+  ex-success: $--color-success;
+  ex-warning: $--color-warning;
+  ex-danger: $--color-danger;
+  ex-info: $--color-info;
+}

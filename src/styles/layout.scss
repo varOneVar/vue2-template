@@ -1,10 +1,13 @@
 .flex {
   display: flex;
   min-width: 0; /* 子元素做文字截断省略号时生效 */
+  min-height: 0;
 }
 
 .flex1 {
   flex: 1;
+  min-width: 0;
+  min-height: 0;
 }
 
 .flex-column {
@@ -67,30 +70,6 @@
   justify-content: center;
 }
 
-.block {
-  display: block;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.cursor-disabled {
-  cursor: not-allowed;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.thin {
-  font-weight: 500;
-}
-
 .nowrap {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -109,4 +88,21 @@
 .label {
   /* flex布局防止label文字换行 */
   word-break: keep-all;
+  white-space: nowrap;
+}
+
+.unclick {
+  pointer-events: none;
+}
+
+.unselect {
+  user-select: none;
+}
+
+.small {
+  font-size: 80%;
+}
+
+.super {
+  font-size: 120%;
 }

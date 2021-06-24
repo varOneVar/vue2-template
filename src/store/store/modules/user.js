@@ -1,4 +1,10 @@
-import { API_getUserByToken, API_getAuthorities, API_loginOut, API_checkToken, API_getUserByUserId } from '@/api/user'
+import {
+  API_getUserByToken,
+  API_getAuthorities,
+  API_loginOut,
+  API_checkToken,
+  API_getUserByUserId
+} from '@/api/user'
 import { goLoginPortal } from '@/utils/client-info'
 import { getResourcesList, filterAsyncRoutes } from '@/utils/login-manage'
 import { MessageBox, Message } from 'element-ui'
@@ -103,13 +109,15 @@ const actions = {
       if (code === '0') {
         commit('CHANGE_USER_NAME', result.name)
         commit('CHANGE_USER_ID', result.userId)
-        const resArr = await Promise.all([dispatch('getUserInfoByUserId'), dispatch('findAuthorities')])
-        const isBad = resArr.some(v => !v)
+        const resArr = await Promise.all([
+          dispatch('getUserInfoByUserId'),
+          dispatch('findAuthorities')
+        ])
+        const isBad = resArr.some((v) => !v)
         isBad && failDispose('您未被授权访问此系统！', commit)
         return !isBad
-      } else {
-        failDispose('获取用户信息失败，请重新登录！', commit)
       }
+      failDispose('获取用户信息失败，请重新登录！', commit)
     } catch (error) {
       console.log(error)
     }
@@ -124,9 +132,8 @@ const actions = {
         commit('CHANGE_USER_INFO', result)
         commit('CHANGE_STORE_ID', result.storeId)
         return true
-      } else {
-        failDispose('获取用户信息失败，请重新登录！', commit)
       }
+      failDispose('获取用户信息失败，请重新登录！', commit)
     } catch (error) {
       console.log(error)
     }
@@ -146,10 +153,12 @@ const actions = {
           commit('CHANGE_RESOURCES', data.ruleList)
           data.scopeMap = result.scopeMap
           commit('CHANGE_USER_ROLES', data)
-          const roles = data.ruleList.map(v => v.code)
+          const roles = data.ruleList.map((v) => v.code)
           commit('CHANGE_ROLES', roles)
           // 有chidren但是children没有长度的就过滤掉
-          const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles).filter(v => !v.children || (v.children && v.children.length))
+          const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles).filter(
+            (v) => !v.children || (v.children && v.children.length)
+          )
           commit('CHANGE_ACCESSED_ROUTERS', accessedRoutes)
           resetRouter(accessedRoutes)
           return true

@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <div class="test she c-red" v-clickoutside="handler">测试clickoutside指令</div>
-    <p>{{ 123213 | numberAddThousands }}</p>
     <router-view v-loading="wholePageLoading" />
   </div>
 </template>
@@ -13,9 +11,6 @@ import device from 'current-device'
 export default {
   name: 'App',
   methods: {
-    handler() {
-      console.log('很棒')
-    },
     initHandler() {
       this.listenerDocumentClick()
       this.getDeviceInfo()

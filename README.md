@@ -23,6 +23,8 @@
 
 * Table：通过参数tableFormat传数据格式，tableData传递数据内容，快速生成table，另外根据配置可选择是否分页
 * Form：封装formItem类型，支持嵌套（递归生成），不破坏原有规则校验
+* Upload: 支持图片分辨率限制，图片压缩
+* Condtion：常和Table共用，作为table的搜索条件，配置化生成需要的搜索条件控件和操作按钮
 
 
 #### 提交git代码暂存区需要使用 package.json的cz命令，因为有对注释格式的校验，cz命令会格式化注释

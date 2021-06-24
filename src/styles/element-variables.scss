@@ -1,7 +1,9 @@
-/* 改变 icon 字体路径变量，必需 */
-$--font-path: '~element-ui/lib/theme-chalk/fonts';
+/* eslint-disable */
 
-@import '~element-ui/packages/theme-chalk/src/index';
+/* 改变 icon 字体路径变量，必需 */
+// $--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+// @import '~element-ui/packages/theme-chalk/src/index';
 
 /* theme color */
 $--color-primary: #0071ce;
@@ -27,6 +29,20 @@ $--background-color-base: #f5f7fa;
 $--table-border: 1px solid #cecece;
 $--button-font-weight: 400;
 
+// sidebar
+$menuText: #bfcbd9;
+$menuActiveText: #0071ce;
+$subMenuActiveText: #f4f4f5; // https://github.com/ElemeFE/element/issues/12951
+
+$menuBg: #304156;
+$menuHover: #263445;
+
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
+$sideBarWidth: 210px;
+$navBarHeight: 50px; // 4px的阴影距离
+$tagsViewHeight: 34px;
+
 :export {
   ex-theme: $--color-primary;
   ex-primary: $--color-primary;
@@ -34,4 +50,12 @@ $--button-font-weight: 400;
   ex-warning: $--color-warning;
   ex-danger: $--color-danger;
   ex-info: $--color-info;
+  ex-menutext: $menuText;
+  ex-menuactivetext: $menuActiveText;
+  ex-submenuactivetext: $subMenuActiveText;
+  ex-menubg: $menuBg;
+  ex-menuhover: $menuHover;
+  ex-submenubg: $subMenuBg;
+  ex-submenuhover: $subMenuHover;
+  ex-sidebarwidth: $sideBarWidth;
 }

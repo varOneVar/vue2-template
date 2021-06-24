@@ -1,5 +1,6 @@
 import variables from '@/styles/element-variables.scss'
 import settings from '@/settings'
+
 const state = {
   theme: variables.theme,
   tagsView: false,
@@ -28,4 +29,3 @@ export default {
   mutations,
   actions
 }
-

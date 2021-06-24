@@ -1,8 +1,14 @@
 <template>
   <div v-if="!item.hidden" class="menu-wrapper">
-    <el-submenu v-if="item.children&&!item.onlyShowFirstChild" ref="subMenu" :index="resolvePath(item.path)" :data-set="resolvePath(item.path)" popper-append-to-body>
+    <el-submenu
+      v-if="item.children && !item.onlyShowFirstChild"
+      ref="subMenu"
+      :index="resolvePath(item.path)"
+      :data-set="resolvePath(item.path)"
+      popper-append-to-body
+    >
       <template slot="title">
-        <p v-if="isCollapse" class="pp">{{ item.meta.title&&item.meta.title.slice(0,2) }}</p>
+        <p v-if="isCollapse" class="pp">{{ item.meta.title && item.meta.title.slice(0, 2) }}</p>
         <item v-if="item.meta" :title="item.meta.title" />
       </template>
       <sidebar-item
@@ -15,9 +21,18 @@
       />
     </el-submenu>
     <template v-else>
-      <app-link v-if="firstChild.meta" :to="resolvePath(firstChild.path)" :data-set="resolvePath(firstChild.path)">
-        <el-menu-item :index="resolvePath(firstChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <p v-if="isCollapse" class="pp">{{ firstChild.meta.title&&firstChild.meta.title.slice(0,2) }}</p>
+      <app-link
+        v-if="firstChild.meta"
+        :to="resolvePath(firstChild.path)"
+        :data-set="resolvePath(firstChild.path)"
+      >
+        <el-menu-item
+          :index="resolvePath(firstChild.path)"
+          :class="{ 'submenu-title-noDropdown': !isNest }"
+        >
+          <p v-if="isCollapse" class="pp">
+            {{ firstChild.meta.title && firstChild.meta.title.slice(0, 2) }}
+          </p>
           <item :title="firstChild.meta.title" />
         </el-menu-item>
       </app-link>
@@ -61,14 +76,13 @@ export default {
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
-      const showingChildren = children.filter(item => {
+      const showingChildren = children.filter((item) => {
         if (item.hidden) {
           return false
-        } else {
-          // Temp set(will be used if only has one showing child)
-          this.onlyOneChild = item
-          return true
         }
+        // Temp set(will be used if only has one showing child)
+        this.onlyOneChild = item
+        return true
       })
 
       // When there is only one child router, the child router is displayed by default
@@ -78,7 +92,7 @@ export default {
 
       // Show parent if there are no child router to display
       if (showingChildren.length === 0) {
-        this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
+        this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
         return true
       }
 
@@ -104,8 +118,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  .pp {
-    margin: 0;
-    text-align: center;
-  }
+.pp {
+  margin: 0;
+  text-align: center;
+}
 </style>

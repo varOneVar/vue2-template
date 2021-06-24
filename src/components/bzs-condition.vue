@@ -216,26 +216,26 @@ export default {
 .condition-query {
   margin-bottom: 10px;
 
-  &__span {
-    min-width: 40px;
-    margin-right: 8px;
-    white-space: nowrap;
-  }
+&__span {
+  min-width: 40px;
+  margin-right: 8px;
+  white-space: nowrap;
+}
 
-  &__select,
-  &__input {
-    width: 160px;
-  }
+&__select,
+&__input {
+  width: 160px;
+}
 
-  &__button {
-    margin-left: 10px;
-  }
+&__button {
+  margin-left: 10px;
+}
 
-  &::after {
-    display: block;
-    clear: both;
-    content: '';
-  }
+&::after {
+  display: block;
+  clear: both;
+  content: '';
+}
 }
 
 .inline-block {

@@ -200,10 +200,10 @@ export default {
 
 <style lang="scss" scoped>
 ::v-deep {
-  .el-table .el-table__header th {
-    color: #282828;
-    background-color: #efefef;
-  }
+.el-table .el-table__header th {
+  color: #282828;
+  background-color: #efefef;
+}
 }
 // .tabel {
 //   width: 100%;

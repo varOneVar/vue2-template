@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import getters from './getters'
 import createPersistedState from 'vuex-persistedstate'
 import storage from 'good-storage'
+import getters from './getters'
 import packageJson from '../../package.json'
 
 Vue.use(Vuex)
@@ -26,10 +26,9 @@ const store = new Vuex.Store({
   plugins: [
     createPersistedState({
       storage: {
-        getItem: key => storage.session.get(key),
-        setItem: (key, value) =>
-          storage.session.set(key, value),
-        removeItem: key => storage.session.remove(key)
+        getItem: (key) => storage.session.get(key),
+        setItem: (key, value) => storage.session.set(key, value),
+        removeItem: (key) => storage.session.remove(key)
       },
       key: `${packageJson.name}-key`
     })

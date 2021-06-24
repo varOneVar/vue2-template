@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-20 10:53:34
- * @LastEditTime: 2021-06-18 16:59:31
+ * @LastEditTime: 2021-06-24 11:16:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \mobile-vue-vant\app-test\.eslintrc.js
@@ -17,7 +17,8 @@ module.exports = {
   extends: [
     'plugin:vue/essential',
     'airbnb-base',
-    'plugin:prettier/recommended' // 添加 prettier 插件
+    'plugin:prettier/recommended', // 添加 prettier 插件
+    'prettier'
   ],
   parserOptions: {
     parser: '@babel/eslint-parser',
@@ -28,8 +29,9 @@ module.exports = {
     }
     // parser: '@babel/eslint-parser'
   },
-  plugins: ['vue', 'html', '@babel'],
+  plugins: ['vue', 'html', '@babel', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
     'no-param-reassign': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',

@@ -1,7 +1,7 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-06-17 10:00:49
- * @LastEditTime: 2021-06-17 13:38:02
+ * @LastEditTime: 2021-06-24 09:16:22
  * @LastEditor: Song Qing
  * @Description:
  * @FilePath: \mobile-vue-vant\app-test\src\store\modules\app.js
@@ -18,12 +18,16 @@ const store = {
     orientation: 'landscape', // 'landscape', 'portrait', or 'unknown'
     os: 'windows' // 	'ios', 'iphone', 'ipad', 'ipod', 'android', 'blackberry', 'windows', 'macos', 'fxos', 'meego', 'television', or 'unknown'
   },
+  isMinScreen: false, // 小屏幕，包括手机，平板以及pc缩小窗口的情况
   contentLoading: false, // 内容区域loading
   wholePageLoading: false, // 整个页面loading
   hiddenOther: false // 隐藏侧边栏和顶部栏
 }
 
 const mutations = {
+  TOGGLE_MIN_SCREENT(state, bool) {
+    state.isMinScreen = bool
+  },
   TOGGLE_SIDEBAR: (state) => {
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false

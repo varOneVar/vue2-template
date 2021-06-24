@@ -1,7 +1,7 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-06-17 16:50:53
- * @LastEditTime: 2021-06-18 13:23:51
+ * @LastEditTime: 2021-06-24 09:33:57
  * @LastEditor: Song Qing
  * @Description: 接口中的用户信息
  * @FilePath: \mobile-vue-vant\app-test\src\utils\client-info.js

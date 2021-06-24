@@ -5,12 +5,8 @@ const state = {
 
 const mutations = {
   ADD_VISITED_VIEW: (state, view) => {
-    if (state.visitedViews.some(v => v.path === view.path)) return
-    state.visitedViews.push(
-      Object.assign({}, view, {
-        title: view.meta.title || 'no-name'
-      })
-    )
+    if (state.visitedViews.some((v) => v.path === view.path)) return
+    state.visitedViews.push({ ...view, title: view.meta.title || 'no-name' })
   },
   ADD_CACHED_VIEW: (state, view) => {
     if (state.cachedViews.includes(view.name)) return
@@ -40,7 +36,7 @@ const mutations = {
   },
 
   DEL_OTHERS_VISITED_VIEWS: (state, view) => {
-    state.visitedViews = state.visitedViews.filter(v => {
+    state.visitedViews = state.visitedViews.filter((v) => {
       return v.meta.affix || v.path === view.path
     })
   },
@@ -55,12 +51,12 @@ const mutations = {
     }
   },
 
-  DEL_ALL_VISITED_VIEWS: state => {
+  DEL_ALL_VISITED_VIEWS: (state) => {
     // keep affix tags
-    const affixTags = state.visitedViews.filter(tag => tag.meta.affix)
+    const affixTags = state.visitedViews.filter((tag) => tag.meta.affix)
     state.visitedViews = affixTags
   },
-  DEL_ALL_CACHED_VIEWS: state => {
+  DEL_ALL_CACHED_VIEWS: (state) => {
     state.cachedViews = []
   },
 

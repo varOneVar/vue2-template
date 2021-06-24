@@ -2,8 +2,9 @@
 // 中文解释 https://ask.dcloud.net.cn/article/36067
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
+  plugins: ['stylelint-prettier'],
   rules: {
-    'block-no-empty': null,
+    'prettier/prettier': true,
     'selector-pseudo-class-no-unknown': [
       true,
       {
@@ -16,19 +17,11 @@ module.exports = {
         ignoreProperties: ['/^ex-/']
       }
     ],
-    // 例如，定义缩进规则
-    indentation: [
-      // 2个空格
-      2,
+    'selector-pseudo-element-no-unknown': [
+      true,
       {
-        // 接收xxx
-        except: ['block'],
-        // 错误的提示信息
-        message: 'Please use 2 spaces for indentation.',
-        // 规则级别，是警告，也可以是错误error
-        severity: 'warning'
+        ignorePseudoElements: ['v-deep']
       }
-    ],
-    'at-rule-no-unknown': null
+    ]
   }
 }

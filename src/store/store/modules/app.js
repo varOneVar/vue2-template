@@ -14,7 +14,7 @@ const mutations = {
   CHANGE_QIANKUN(state, bool) {
     state.isQianKun = bool
   },
-  TOGGLE_SIDEBAR: state => {
+  TOGGLE_SIDEBAR: (state) => {
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
   },

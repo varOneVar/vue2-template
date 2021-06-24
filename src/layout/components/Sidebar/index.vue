@@ -1,18 +1,23 @@
 <template>
-  <div :class="{'has-logo':showLogo}">
+  <div :class="{ 'has-logo': showLogo }">
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="variables.menuBg"
-        :text-color="variables.menuText"
+        :background-color="variables['ex-menuBg']"
+        :text-color="variables['ex-menuText']"
         :unique-opened="true"
-        :active-text-color="variables.menuActiveText"
+        :active-text-color="variables['ex-menuActiveText']"
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in accessedRoutes" :key="route.path" :is-collapse="isCollapse" :item="route" />
+        <sidebar-item
+          v-for="route in accessedRoutes"
+          :key="route.path"
+          :is-collapse="isCollapse"
+          :item="route"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -20,15 +25,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import variables from '@/styles/element-variables.scss'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
-import variables from '@/styles/variables.scss'
+
 export default {
   computed: {
-    ...mapGetters([
-      'accessedRoutes',
-      'sidebar'
-    ]),
+    ...mapGetters(['accessedRoutes', 'sidebar']),
     activeMenu() {
       const route = this.$route
       const { meta, path } = route

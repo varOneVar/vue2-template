@@ -77,7 +77,7 @@ module.exports = {
         .loader('sass-resources-loader')
         .options({
           // 全局变量文件路径，支持string和array，全局文件无需引入变量文件即可使用变量
-          resources: ['./src/styles/element-variables.scss']
+          resources: ['./src/styles/element-variables.scss', './src/styles/mixin.scss']
         })
         .end()
     })

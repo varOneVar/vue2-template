@@ -1,7 +1,9 @@
 <!-- 手绘图表 -->
 <!-- https://juejin.cn/post/6950684708443258894 -->
 <template>
-  <canvas :id="canvasId" ref="canvas" class="canvas"></canvas>
+  <div class="father">
+    <canvas :id="canvasId" ref="canvas" class="canvas"></canvas>
+  </div>
 </template>
 
 <script>
@@ -170,6 +172,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.father {
+  height: 3000px;
+  background: greenyellow;
+}
+
 .canvas {
   width: 100%;
   height: 400px;

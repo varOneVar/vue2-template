@@ -18,6 +18,14 @@
  * 工具函数
  * log日志查看（设置特殊路由，通过页面展示，功能支持待定）
 
+
+#### 需要关注的package.json 命令
+* **启动服务：** `npm run serve` || `npm run dev`
+* **打包：** `npm run qa` || `npm run build` 打包环境不同
+* **更新版本** `npm run version` 会更新package.json的版本，并给当前git打上tag，最后生成一份changelog
+* **代码提交：** `npm run git-push` || `npm run vs-push`，在git软件里使用 `npm run git-push` 可以打开交互命令，在vscode里使用`npm run vs-push`
+* **Git commit** `npm run cz` 对git commit功能使用交互命令，在此之前请使用git add提交代码
+
 #### 公共组件（element ui基础上二次封装）
 > 在尽量不影响原始element组件功能参数情况下，对常用功能组件配置化封装，省去开发时间成本
 

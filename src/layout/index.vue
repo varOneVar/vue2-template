@@ -9,7 +9,7 @@
       </header>
       <app-main />
     </section>
-    <el-backtop target=".page-layout" :right="30" :bottom="30" />
+    <el-backtop target=".app-wrapper" :right="30" :bottom="30" />
   </div>
 </template>
 
@@ -62,6 +62,9 @@ export default {
 
 .aside {
   width: 200px;
+  height: 100%;
+  overflow-y: auto;
+  background: $menuBg;
   transition: width 0.28s;
 }
 

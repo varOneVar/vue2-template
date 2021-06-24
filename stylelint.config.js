@@ -2,19 +2,17 @@
 // 中文解释 https://ask.dcloud.net.cn/article/36067
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
-  plugins: ['stylelint-prettier'],
+  plugins: ['stylelint-scss', 'stylelint-prettier'],
   rules: {
     'prettier/prettier': true,
+    'at-rule-no-unknown': null,
+    'scss/at-rule-no-unknown': true,
+    'property-no-unknown': null,
+    'scss/property-no-unknown': true,
     'selector-pseudo-class-no-unknown': [
       true,
       {
         ignorePseudoClasses: ['export']
-      }
-    ],
-    'property-no-unknown': [
-      true,
-      {
-        ignoreProperties: ['/^ex-/']
       }
     ],
     'selector-pseudo-element-no-unknown': [

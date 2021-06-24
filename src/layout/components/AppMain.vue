@@ -1,9 +1,11 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-      <keep-alive>
-        <router-view v-loading="contentLoading" />
-      </keep-alive>
+      <div class="wrapper">
+        <div class="wrapper__div">
+          <router-view v-loading="contentLoading" />
+        </div>
+      </div>
     </transition>
   </section>
 </template>
@@ -26,32 +28,21 @@ export default {
 .app-main {
   position: relative;
   width: 100%;
+  height: calc(100vh - #{$navBarHeight});
+  overflow-x: auto;
 
-  /* 50= navbar  50  */
-  min-height: calc(100vh - #{$navBarHeight});
-
-  &.iframeAppMain {
-    min-height: 100%;
-  }
+  @include scrollBar;
 }
 
-.fixed-header + .app-main {
+.wrapper {
   overflow: hidden;
-}
 
-.hasTagsView {
-  .app-main {
-    /* 84 = navbar + tags-view = 50 + 34 */
-    min-height: calc(100vh - #{$navBarHeight} - #{$tagsViewHeight});
-  }
-}
-</style>
-
-<style lang="scss">
-// fix css style bug in open el-dialog
-.el-popup-parent--hidden {
-  .fixed-header {
-    padding-right: 15px;
+  &__div {
+    padding: 16px;
+    margin: 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   }
 }
 </style>

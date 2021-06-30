@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-04-20 10:53:34
- * @LastEditTime: 2021-06-24 11:16:59
+ * @LastEditTime: 2021-06-30 10:09:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \mobile-vue-vant\app-test\.eslintrc.js

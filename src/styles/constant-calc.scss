@@ -1,6 +1,7 @@
 // @import './element-variables.scss';
+// https://www.sassmeister.com/ 不清楚的在这个在线网站上可以看到转换后的样式
 
-// 循环出7个尺寸百分比布局
+// 循环出7个尺寸百分比布局 例：grid-col-4
 @for $i from 1 through 7 {
   $calc: 1 / $i * 100%;
   .grid-col-#{$i} {
@@ -10,7 +11,7 @@
   }
 }
 
-// 循环出margin和padding的常用值
+// 循环出margin和padding的常用值, 例：plr-15, mlr-15
 $enum: 10, 15, 20, 30;
 $types: (
   m: margin,
@@ -32,7 +33,7 @@ $position: (
 @each $i in $enum {
   @each $key, $value in $position {
     @each $ti, $tv in $types {
-      #{$ti}#{$key}-#{$i} {
+      .#{$ti}#{$key}-#{$i} {
         @each $k in $value {
           #{$tv}-#{$k}: #{$i}px;
         }
@@ -41,7 +42,7 @@ $position: (
   }
 }
 
-// 循环出常用字体12-28
+// 循环出常用字体12-28偶数字号，例：f12,f14
 @for $i from 0 through 8 {
   $fontSize: 12 + $i * 2;
   .f#{$fontSize} {
@@ -58,7 +59,7 @@ $display: block, inline-block, inline;
   }
 }
 
-// cursor常用类型
+// cursor常用类型，例：cursor-pointer
 $cursor: (
   pointer: pointer,
   disabled: not-allowed
@@ -91,7 +92,7 @@ $textAlign: left, right, center;
   }
 }
 
-// 颜色
+// 颜色，例：c-red, bg-red
 $colorType: (
   red: $--color-danger,
   blue: $--color-primary,

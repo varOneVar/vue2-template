@@ -1,8 +1,15 @@
 <template>
-  <div class="navbar clearfix">
-    <div class="right-menu fr flex-align-center">
-      <!-- <img class="lock" :src="require('@/assets/lock.png')" @click="$router.push('/changeuserpwd')"> -->
-      <el-avatar class="avatar" :size="30" :src="userInfo && userInfo.avatar"> </el-avatar>
+  <div class="navbar flex-sb-c">
+    <hamburger
+      id="hamburger-container"
+      :is-active="sidebar.opened"
+      class="hamburger-container"
+      @toggleClick="toggleSideBar"
+    />
+    <div class="right-menu flex-align-center">
+      <el-avatar class="avatar" shape="circle" :size="30" :src="userInfo && userInfo.avatar">
+        <img :src="require('@/assets/avatar.png')" />
+      </el-avatar>
       <span>{{ userName || '未登录' }}</span>
       <i class="el-icon-switch-button logout hover-effect" title="退出" @click="logout" />
     </div>
@@ -11,12 +18,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Hamburger from './Hamburger'
 
 export default {
   methods: {
-    toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
-    },
     logout() {
       this.$confirm('确认要退出当前账号吗？')
         .then(() => {
@@ -24,11 +29,13 @@ export default {
         })
         .catch(() => {})
     },
+    ...mapActions('app', ['toggleSideBar']),
     ...mapActions('user', ['loginOutByToken'])
   },
   computed: {
     ...mapGetters(['sidebar', 'device', 'userInfo', 'userName'])
-  }
+  },
+  components: { Hamburger }
 }
 </script>
 
@@ -64,6 +71,8 @@ export default {
     margin-right: 10px;
     margin-left: 10px;
     background-color: #282828;
+    border: 1px solid #eee;
+    border-radius: 50%;
   }
 
   .breadcrumb-container {

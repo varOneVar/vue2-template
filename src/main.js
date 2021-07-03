@@ -21,8 +21,6 @@ Vue.use(ElementUI, {
   size: 'small'
 })
 
-// import '../mock'
-
 Vue.config.productionTip = false
 
 // 如果错误被页面的try/catch捕获，且catch没有抛出错误，全局异常捕获就拿不到错误，作用不大

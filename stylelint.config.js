@@ -8,7 +8,6 @@ module.exports = {
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
     'property-no-unknown': null,
-    'scss/property-no-unknown': true,
     'selector-pseudo-class-no-unknown': [
       true,
       {

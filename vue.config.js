@@ -1,6 +1,5 @@
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const { name } = require('./package.json')
-const mockApi = require('./mock/index.js')
 
 module.exports = {
   publicPath: process.env.VUE_APP_PUBLIC_PATH,
@@ -30,7 +29,6 @@ module.exports = {
     https: false,
     hotOnly: true,
     // proxy: 'https://aloha-qa.walmartmobile.cn',
-    before: mockApi,
     // 查阅 https://github.com/vuejs/vue-doc-zh-cn/vue-cli/cli-service.md#配置代理
     // proxy: {
     //   '/user-center': {
@@ -64,9 +62,9 @@ module.exports = {
       config.devtool = 'eval-source-map'
     }
     config.resolve.fallback = {
-      crypto: require.resolve('crypto-browserify'),
+      crypto: false,
       path: require.resolve('path-browserify'),
-      stream: require.resolve('stream-browserify')
+      stream: false
     }
   },
   chainWebpack: (config) => {

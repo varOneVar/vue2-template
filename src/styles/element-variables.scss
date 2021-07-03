@@ -1,10 +1,5 @@
 /* eslint-disable */
 
-/* 改变 icon 字体路径变量，必需 */
-// $--font-path: '~element-ui/lib/theme-chalk/fonts';
-
-// @import '~element-ui/packages/theme-chalk/src/index';
-
 /* theme color */
 $--color-primary: #0071ce;
 $--color-success: #2a8703;
@@ -44,18 +39,12 @@ $navBarHeight: 50px; // 4px的阴影距离
 $tagsViewHeight: 34px;
 
 :export {
-  ex-theme: $--color-primary;
-  ex-primary: $--color-primary;
-  ex-success: $--color-success;
-  ex-warning: $--color-warning;
-  ex-danger: $--color-danger;
-  ex-info: $--color-info;
-  ex-menutext: $menuText;
-  ex-menuactivetext: $menuActiveText;
-  ex-submenuactivetext: $subMenuActiveText;
-  ex-menubg: $menuBg;
-  ex-menuhover: $menuHover;
-  ex-submenubg: $subMenuBg;
-  ex-submenuhover: $subMenuHover;
-  ex-sidebarwidth: $sideBarWidth;
+  menutext: $menuText;
+  menuactivetext: $menuActiveText;
+  submenuactivetext: $subMenuActiveText;
+  menubg: $menuBg;
+  menuhover: $menuHover;
+  submenubg: $subMenuBg;
+  submenuhover: $subMenuHover;
+  sidebarwidth: $sideBarWidth;
 }

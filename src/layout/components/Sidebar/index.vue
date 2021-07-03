@@ -28,6 +28,9 @@ import variables from '@/styles/element-variables.scss'
 import SidebarItem from './SidebarItem'
 
 export default {
+  created() {
+    console.log(variables, 888)
+  },
   computed: {
     ...mapGetters(['accessedRoutes', 'sidebar']),
     activeMenu() {

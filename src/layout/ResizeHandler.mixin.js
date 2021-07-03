@@ -27,7 +27,7 @@ export default {
         clearTimeout(timer)
         timer = setTimeout(() => {
           if (!document.hidden) {
-            this.this.modifiedSomeInfo()
+            this.modifiedSomeInfo()
           }
         }, 200)
       }

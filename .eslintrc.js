@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2021-04-20 10:53:34
- * @LastEditTime: 2021-06-30 10:09:04
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-08-17 23:39:31
+ * @LastEditors: your name
  * @Description: In User Settings Edit
- * @FilePath: \mobile-vue-vant\app-test\.eslintrc.js
+ * @FilePath: \vue2-template\vue2-template\.eslintrc.js
  */
 const path = require('path')
 
@@ -39,6 +39,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'vue/no-multiple-template-root': 'off',
     'no-unused-expressions': 0,
+    'vue/script-setup-uses-vars': 'off',
     'no-underscore-dangle': 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-console': process.env.NODE_ENV === 'production' ? { allow: ['warn', 'error'] } : 0,

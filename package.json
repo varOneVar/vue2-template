@@ -35,7 +35,7 @@
     "normalize.css": "^8.0.1",
     "query-string": "5",
     "screenfull": "^5.1.0",
-    "vue": "2.6.11",
+    "vue": "2.6.12",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.0.0-beta.3",

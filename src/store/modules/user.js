@@ -1,16 +1,16 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-06-17 16:30:47
- * @LastEditTime: 2021-06-22 15:42:20
+ * @LastEditTime: 2021-08-17 23:37:06
  * @LastEditor: Song Qing
  * @Description: 用户登录相关
- * @FilePath: \mobile-vue-vant\app-test\src\store\modules\user.js
+ * @FilePath: \vue2-template\vue2-template\src\store\modules\user.js
  */
+import { Message } from 'element-ui'
 import { apiUseLogin, apiUseLogout } from '@/api/jobs/user'
 import { goLoginPortal } from '@/utils/client-info'
 import { encrypt } from '@/utils/crypto'
 import storage from '@/utils/storage'
-import { Message } from 'element-ui'
 import asyncRoutes from '@/router/asyncRoutes'
 import { SESSION_KEY } from '@/constants'
 // import { failDispose } from '@/utils'

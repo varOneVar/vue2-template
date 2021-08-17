@@ -1,14 +1,14 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-06-23 19:08:09
- * @LastEditTime: 2021-06-23 19:19:24
+ * @LastEditTime: 2021-08-17 23:36:32
  * @LastEditor: Song Qing
  * @Description: 给vue原型上增加方法
- * @FilePath: \mobile-vue-vant\app-test\src\global.js
+ * @FilePath: \vue2-template\vue2-template\src\global.js
  */
 
-import log from '@/utils/log'
 import dayjs from 'dayjs'
+import log from '@/utils/log'
 import storage from '@/utils/storage'
 import { deepClone } from '@/utils'
 import * as constants from './constants'

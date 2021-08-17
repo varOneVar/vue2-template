@@ -4,10 +4,10 @@
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="variables['ex-menuBg']"
-        :text-color="variables['ex-menuText']"
+        :background-color="variables['menuBg']"
+        :text-color="variables['menutext']"
         :unique-opened="true"
-        :active-text-color="variables['ex-menuActiveText']"
+        :active-text-color="variables['menuActiveText']"
         :collapse-transition="false"
         mode="vertical"
       >
@@ -28,6 +28,11 @@ import variables from '@/styles/element-variables.scss'
 import SidebarItem from './SidebarItem'
 
 export default {
+  data() {
+    return {
+      variables
+    }
+  },
   created() {
     console.log(variables, 888)
   },
@@ -44,9 +49,6 @@ export default {
     },
     showLogo() {
       return this.$store.state.settings.sidebarLogo
-    },
-    variables() {
-      return variables
     },
     isCollapse() {
       return !this.sidebar.opened

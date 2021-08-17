@@ -1,18 +1,10 @@
 <template>
-  <div id="app">
-    <FChanrts />
-    <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <!-- <div class="form-class a1sd--213--asdas-123"></div> -->
-    <button class="btn" @click="testHandler">get请求函数</button>
-    <button class="btn" @click="testHandler1">post请求函数</button>
-  </div>
+  <div id="app"></div>
 </template>
 
 <script>
 import { apiArticleList } from '@/api/jobs/pages'
 import { apiUseLogin } from '@/api/jobs/user'
-import FChanrts from '@/views/workbentch/FChanrts'
 
 export default {
   name: 'App',
@@ -35,9 +27,6 @@ export default {
   created() {
     this.testHandler()
     this.testHandler1()
-  },
-  components: {
-    FChanrts
   }
 }
 </script>

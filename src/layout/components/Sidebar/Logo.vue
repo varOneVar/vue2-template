@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import settings from '@/settings'
 
 export default {
   name: 'SidebarLogo',
@@ -22,8 +22,10 @@ export default {
       required: true
     }
   },
-  computed: {
-    ...mapState('settings', ['title'])
+  data() {
+    return {
+      title: settings.appTitle
+    }
   }
 }
 </script>

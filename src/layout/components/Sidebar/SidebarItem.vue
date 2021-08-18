@@ -1,42 +1,38 @@
 <template>
-  <div v-if="!item.hidden" class="menu-wrapper">
-    <el-submenu
-      v-if="item.children && !item.onlyShowFirstChild"
-      ref="subMenu"
-      :index="resolvePath(item.path)"
-      :data-set="resolvePath(item.path)"
-      popper-append-to-body
+  <div v-if="!item.hidden">
+    <template
+      v-if="
+        hasOneShowingChild(item.children, item) &&
+        (!onlyOneChild.children || onlyOneChild.noShowingChildren) &&
+        !item.alwaysShow
+      "
     >
+      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
+        <el-menu-item
+          :index="resolvePath(onlyOneChild.path)"
+          :class="{ 'submenu-title-noDropdown': !isNest }"
+        >
+          <item
+            :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"
+            :title="onlyOneChild.meta.title"
+          />
+        </el-menu-item>
+      </app-link>
+    </template>
+
+    <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template slot="title">
-        <p v-if="isCollapse" class="pp">{{ item.meta.title && item.meta.title.slice(0, 2) }}</p>
-        <item v-if="item.meta" :title="item.meta.title" />
+        <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="item.meta.title" />
       </template>
       <sidebar-item
         v-for="child in item.children"
         :key="child.path"
         :is-nest="true"
         :item="child"
-        :base-path="resolvePath(item.path)"
+        :base-path="resolvePath(child.path)"
         class="nest-menu"
       />
     </el-submenu>
-    <template v-else>
-      <app-link
-        v-if="firstChild.meta"
-        :to="resolvePath(firstChild.path)"
-        :data-set="resolvePath(firstChild.path)"
-      >
-        <el-menu-item
-          :index="resolvePath(firstChild.path)"
-          :class="{ 'submenu-title-noDropdown': !isNest }"
-        >
-          <p v-if="isCollapse" class="pp">
-            {{ firstChild.meta.title && firstChild.meta.title.slice(0, 2) }}
-          </p>
-          <item :title="firstChild.meta.title" />
-        </el-menu-item>
-      </app-link>
-    </template>
   </div>
 </template>
 
@@ -52,9 +48,6 @@ export default {
   mixins: [FixiOSBug],
   props: {
     // route object
-    isCollapse: {
-      type: Boolean
-    },
     item: {
       type: Object,
       required: true
@@ -84,18 +77,15 @@ export default {
         this.onlyOneChild = item
         return true
       })
-
       // When there is only one child router, the child router is displayed by default
       if (showingChildren.length === 1) {
         return true
       }
-
       // Show parent if there are no child router to display
       if (showingChildren.length === 0) {
         this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
         return true
       }
-
       return false
     },
     resolvePath(routePath) {
@@ -108,18 +98,6 @@ export default {
       return path.resolve(this.basePath, routePath)
     }
   },
-  computed: {
-    firstChild() {
-      if (this.item.children && this.item.onlyShowFirstChild) this.item.children[0]
-      return this.item
-    }
-  },
   components: { Item, AppLink }
 }
 </script>
-<style lang="scss" scoped>
-.pp {
-  margin: 0;
-  text-align: center;
-}
-</style>

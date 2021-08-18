@@ -1,7 +1,7 @@
 export default {
   computed: {
-    device() {
-      return this.$store.state.app.device
+    isMinScreen() {
+      return this.$store.state.app.isMinScreen
     }
   },
   mounted() {
@@ -15,7 +15,7 @@ export default {
       if ($subMenu) {
         const { handleMouseleave } = $subMenu
         $subMenu.handleMouseleave = (e) => {
-          if (this.device === 'mobile') {
+          if (this.isMinScreen) {
             return
           }
           handleMouseleave(e)

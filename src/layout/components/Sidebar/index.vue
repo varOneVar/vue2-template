@@ -1,13 +1,15 @@
 <template>
-  <div class="menu">
+  <div>
+    <logo v-if="showLogo" :collapse="isCollapse" />
+    {{ accessedRoutes.length }}
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="variables['menuBg']"
-        :text-color="variables['menutext']"
+        :background-color="variables.menubg"
+        :text-color="variables.menutext"
         :unique-opened="true"
-        :active-text-color="variables['menuActiveText']"
+        :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
         mode="vertical"
       >
@@ -16,6 +18,7 @@
           :key="route.path"
           :is-collapse="isCollapse"
           :item="route"
+          :base-path="route.path"
         />
       </el-menu>
     </el-scrollbar>
@@ -25,16 +28,14 @@
 <script>
 import { mapGetters } from 'vuex'
 import variables from '@/styles/element-variables.scss'
+import settings from '@/settings'
+import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 
+console.log(variables, '111')
 export default {
-  data() {
-    return {
-      variables
-    }
-  },
   created() {
-    console.log(variables, 888)
+    console.log(this.accessedRoutes)
   },
   computed: {
     ...mapGetters(['accessedRoutes', 'sidebar']),
@@ -48,12 +49,15 @@ export default {
       return path
     },
     showLogo() {
-      return this.$store.state.settings.sidebarLogo
+      return settings.sidebarLogo
+    },
+    variables() {
+      return variables
     },
     isCollapse() {
       return !this.sidebar.opened
     }
   },
-  components: { SidebarItem }
+  components: { SidebarItem, Logo }
 }
 </script>

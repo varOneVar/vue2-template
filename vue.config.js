@@ -1,5 +1,6 @@
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const { name } = require('./package.json')
+const mockApi = require('./src/mock/index.js')
 
 module.exports = {
   publicPath: process.env.VUE_APP_PUBLIC_PATH,
@@ -25,21 +26,21 @@ module.exports = {
     open: true,
     // host: '192.168.35.218',
     // port: port,
-    port: 3999,
+    port: 5890,
     https: false,
     hotOnly: true,
-    // proxy: 'https://aloha-qa.walmartmobile.cn',
+    before: mockApi,
+    // proxy: 'xxxx',
     // 查阅 https://github.com/vuejs/vue-doc-zh-cn/vue-cli/cli-service.md#配置代理
     // proxy: {
-    //   '/user-center': {
-    // 		target: 'https://aloha-qa.walmartmobile.cn', // 登陆
+    //   '/user': {
+    // 		target: 'xxxx', // 登陆
     // 		changeOrigin: true,
     // 		ws: false
     // 	},
-    // 	'/mcCmsServer/': {
-    // 		// target: 'https://aloha-qa.walmartmobile.cn',
+    // 	'/server/': {
     // 		ws: false,
-    // 		target: 'http://192.168.35.92:8089',
+    // 		target: 'xxxx',
     // 		changeOrigin: true
     // 		// pathRewrite: {
     // 		//   ['^' + process.env.VUE_APP_BASE_API]: ''
@@ -60,11 +61,6 @@ module.exports = {
     if (process.env.NODE_ENV !== 'production') {
       // 调试显示错误位置
       config.devtool = 'eval-source-map'
-    }
-    config.resolve.fallback = {
-      crypto: false,
-      path: require.resolve('path-browserify'),
-      stream: false
     }
   },
   chainWebpack: (config) => {

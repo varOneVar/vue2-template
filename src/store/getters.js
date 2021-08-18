@@ -11,5 +11,6 @@ export default {
   hasAuth: (state) => (needRoles) => needRoles.some((v) => state.user.roles.includes(v)),
   userName: (state) => (state.user.userInfo || {}).userName,
   accessedRoutes: (state) => state.user.accessedRoutes,
+  isMinScreen: (state) => state.app.isMinScreen,
   wholePageLoading: (state) => state.app.wholePageLoading
 }

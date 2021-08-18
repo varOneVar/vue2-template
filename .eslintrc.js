@@ -1,36 +1,21 @@
-/*
- * @Author: your name
- * @Date: 2021-04-20 10:53:34
- * @LastEditTime: 2021-08-17 23:39:31
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \vue2-template\vue2-template\.eslintrc.js
- */
 const path = require('path')
 
 module.exports = {
   root: true,
   env: {
-    browser: true,
-    es2021: true
+    node: true
   },
-  extends: [
-    'plugin:vue/essential',
-    'airbnb-base',
-    'plugin:prettier/recommended', // 添加 prettier 插件
-    'prettier'
-  ],
+  extends: ['plugin:vue/essential', 'airbnb-base', 'plugin:prettier/recommended'],
+  plugins: ['vue', 'html', '@babel'],
   parserOptions: {
     parser: '@babel/eslint-parser',
-    ecmaVersion: 12,
     sourceType: 'module',
     babelOptions: {
       configFile: path.resolve(__dirname, './babel.config.js')
     }
-    // parser: '@babel/eslint-parser'
   },
-  plugins: ['vue', 'html', '@babel', 'prettier'],
   rules: {
+    'vue/script-setup-uses-vars': 'off',
     'prettier/prettier': 'error',
     'no-param-reassign': 'off',
     'import/no-unresolved': 'off',
@@ -39,10 +24,9 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'vue/no-multiple-template-root': 'off',
     'no-unused-expressions': 0,
-    'vue/script-setup-uses-vars': 'off',
     'no-underscore-dangle': 0,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'no-console': process.env.NODE_ENV === 'production' ? { allow: ['warn', 'error'] } : 0,
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/order-in-components': [
       'warn',
       {

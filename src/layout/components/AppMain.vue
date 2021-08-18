@@ -1,24 +1,27 @@
 <template>
-  <section class="app-main">
+  <section class="app-main" :class="{ iframeAppMain: hiddenOther }">
     <transition name="fade-transform" mode="out-in">
-      <div class="wrapper">
-        <div class="wrapper__div">
-          <router-view v-loading="contentLoading" />
+      <keep-alive>
+        <div class="wrapper">
+          <div class="wrapper__div">
+            <router-view :key="key" v-loading="contentLoading" />
+          </div>
         </div>
-      </div>
+      </keep-alive>
     </transition>
   </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'AppMain',
   computed: {
+    ...mapState('app', ['contentLoading']),
     ...mapGetters(['hiddenOther']),
-    contentLoading() {
-      return this.$store.state.app.contentLoading
+    key() {
+      return this.$route.path
     }
   }
 }

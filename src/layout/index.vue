@@ -1,22 +1,22 @@
 <template>
-  <div class="app-wrapper flex">
-    <aside class="aside" :style="{ width: `${siderBarWidth}px` }">
-      <Sidebar />
+  <div :class="classObj" class="app-wrapper flex">
+    <aside v-if="!hiddenOther" class="aside" :style="{ width: `${siderBarWidth}px` }">
+      <sidebar class="sidebar-container" />
     </aside>
-    <section class="container flex1">
-      <header class="header">
+    <div :class="{ iframe: hiddenOther }" class="main-container flex1">
+      <header v-if="!hiddenOther" class="header">
         <navbar />
       </header>
       <app-main />
-    </section>
-    <el-backtop target=".app-wrapper" :right="30" :bottom="30" />
+    </div>
+    <el-backtop target=".app-main" :right="30" :bottom="30" />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex'
 import { AppMain, Navbar, Sidebar } from './components'
-import ResizeMixin from './ResizeHandler.mixin'
+import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
   name: 'Layout',
@@ -27,22 +27,19 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      sidebar: (state) => state.app.sidebar
+    }),
+    ...mapGetters(['hiddenOther', 'isMinScreen']),
     siderBarWidth() {
       return this.sidebar.opened ? 210 : 60
     },
-    ...mapState({
-      sidebar: (state) => state.app.sidebar,
-      device: (state) => state.app.device,
-      needTagsView: (state) => state.settings.tagsView,
-      fixedHeader: (state) => state.settings.fixedHeader
-    }),
-    ...mapGetters(['hiddenOther']),
     classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === 'mobile'
+        mobile: this.isMinScreen
       }
     }
   },
@@ -62,16 +59,20 @@ export default {
 
 .aside {
   width: 200px;
-  height: 100%;
+  min-height: 100%;
   overflow-y: auto;
   background: $menuBg;
   transition: width 0.28s;
+  @include scrollBar;
 }
 
-.container {
+.main-container {
   position: relative;
   height: 100%;
   padding-top: $navBarHeight;
+  &.iframe {
+    padding-top: 0;
+  }
 }
 
 .header {

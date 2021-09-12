@@ -2,11 +2,13 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-04-25 15:53:17
- * @LastEditTime: 2021-04-26 15:42:21
+ * @LastEditTime: 2021-09-12 21:12:56
  * @LastEditor: Song Qing
  * @Description: 接口的辅助函数
- * @FilePath: \app-test\src\api\base\handlers.js
+ * @FilePath: \vue2-template\src\api\base\handlers.js
  */
+
+import qs from 'query-string'
 
 /**
  * 生成请求的key，来判断是否重复请求或者数据缓存
@@ -15,7 +17,7 @@
 
 export function generateReqKey(config) {
   const { method, url, params, data } = config
-  return [method, url, JSON.stringify(params), JSON.stringify(data)].join('&')
+  return [method, url, JSON.stringify(params), JSON.stringify(data)].join('|')
 }
 
 /**
@@ -115,4 +117,26 @@ const MemoryCache = {
 }
 export function createMemoryCache() {
   return Object.create(MemoryCache)
+}
+
+// 获取config里的参数
+export function getParams(config) {
+  const obj = {
+    post: 'data',
+    get: 'params'
+  }
+  const key = obj[config.method]
+  if (config.headers['Content-Type'] === 'application/x-www-form-urlencoded') {
+    let result = {}
+    const data = config[key]
+    try {
+      if (data) {
+        result = qs.parse(data)
+      }
+      return result
+    } catch (error) {
+      return data
+    }
+  }
+  return config[key]
 }

@@ -7,46 +7,27 @@ import { getClientInfo, checkTimeout, failDispose } from '@/utils'
 import { SUCCESS_CODE } from '@/constants'
 
 import { getMessage, tokenInvalidate, tokenLoginother } from './api-error'
-import retryAdapterEnhancer from './api-again'
-import cacheAdapterEnhancer from './api-cache'
-import cancelRepeatRequestBase from './api-cancel'
+import retryAdapterEnhancer from './api-again' // config中带有noRetry则不使用断线重连
+import cacheAdapterEnhancer from './api-cache' // config中带有noCache则不使用数据缓存
+import cancelRepeatRequestBase from './api-cancel' // config中带有noCancel则不使用取消重复请求
 import { createAdapterMiddleareModel } from './handlers'
 
 const APP = createAdapterMiddleareModel()
+
+// 断线重连, 延时时间每次翻倍
 APP.use(
-  // 断线重连, 延时时间每次翻倍
   retryAdapterEnhancer({
-    times: 3, // 断线重连次数，最多七次，多了没必要
+    times: 2, // 断线重连次数，最多四次，多了没必要
     delay: 1000 // 延时触发重连，2的指数性增加，1s, 2s, 4s,8s...
   })
 )
+
+// 数据缓存
 APP.use(
-  // 数据缓存
   cacheAdapterEnhancer({
     maxAge: 2 * 60 * 1000 // 缓冲有效期（ms）
   })
 )
-// 获取参数
-function getParams(config) {
-  const obj = {
-    post: 'data',
-    get: 'params'
-  }
-  const key = obj[config.method]
-  if (config.headers['Content-Type'] === 'application/x-www-form-urlencoded') {
-    let result = {}
-    const data = config[key]
-    try {
-      if (data) {
-        result = qs.parse(data)
-      }
-      return result
-    } catch (error) {
-      return data
-    }
-  }
-  return config[key]
-}
 
 // 创建请求实例
 function createService() {
@@ -62,7 +43,6 @@ function createService() {
   service.interceptors.request.use(
     (config) => {
       checkTimeout() // 检查登录超时
-      const params = getParams(config)
       const { token } = store.getters
       // header里添加权限
       if (token && !config.headers.Authorization) {
@@ -70,20 +50,21 @@ function createService() {
         config.headers.clientInfo = getClientInfo()
       }
       // 如果参数带有noCancel则取消重复请求
-      if (params.noCancel) {
-        delete params.noCancel
+      if (config.noCancel) {
+        delete config.noCancel
       } else {
+        delete config.noCancel
         cancelRequest.remove(config)
         cancelRequest.add(config)
       }
       // 加载全局loading
-      if (params.noLoading) {
+      if (config.noLoading) {
         store.commit('app/SET_CONTENT_LOADING', false)
         store.commit('app/SET_WHOLE_PAGE_LOADING', false)
-        delete params.noLoading
-      } else if (params.wholePageLoading) {
+        delete config.noLoading
+      } else if (config.wholePageLoading) {
         store.commit('app/SET_WHOLE_PAGE_LOADING', true)
-        delete params.wholePageLoading
+        delete config.wholePageLoading
       } else {
         store.commit('app/SET_CONTENT_LOADING', true)
       }

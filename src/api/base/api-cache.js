@@ -1,10 +1,10 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-04-23 17:08:37
- * @LastEditTime: 2021-04-26 15:44:10
+ * @LastEditTime: 2021-09-12 21:12:20
  * @LastEditor: Song Qing
  * @Description: 缓存请求数据
- * @FilePath: \app-test\src\api\base\api-cache.js
+ * @FilePath: \vue2-template\src\api\base\api-cache.js
  */
 import { generateReqKey, createMemoryCache } from './handlers'
 
@@ -17,15 +17,16 @@ function cacheAdapterEnhancer(options = {}) {
   } = options
 
   return async (config, next) => {
-    const { method, forceUpdate } = config
+    const { method, noCache } = config
     const useCache = config[cacheFlag] != null ? config[cacheFlag] : enabledByDefault
     // 如果是get请求且使用缓存， post请求一般是上传，不予处理
     if (method === 'get' && useCache) {
       // 如果cache是给定的对象，带有set,get,delete,clear是个函数，就使用用户定义的这个缓存对象
       const requestKey = generateReqKey(config) // 生成请求Key
       let responsePromise = defaultCache.get(requestKey) // 从缓存中获取请求key对应的响应对象
-      if (!responsePromise || forceUpdate) {
-        // 缓存未命中/失效或强制更新时，则重新请求数据
+      // 缓存未命中/失效或强制更新时，则重新请求数据
+      if (!responsePromise || noCache) {
+        delete config.noCache
         responsePromise = (async () => {
           try {
             return await next(config) // 使用默认的xhrAdapter发送请求

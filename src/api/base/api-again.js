@@ -1,24 +1,25 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-04-23 17:09:02
- * @LastEditTime: 2021-06-17 16:45:22
+ * @LastEditTime: 2021-09-12 21:08:56
  * @LastEditor: Song Qing
  * @Description: 重连请求
- * @FilePath: \mobile-vue-vant\app-test\src\api\base\api-again.js
+ * @FilePath: \vue2-template\src\api\base\api-again.js
  */
 function retryAdapterEnhancer(options = {}) {
   const { times = 0, delay = 300 } = options
 
   return async (config, next) => {
-    // 最多七次，多了没必要
-    const { retryTimes = Math.min(times, 7), retryDelay = delay } = config
+    // 最多四次，多了没必要
+    const { retryTimes = Math.min(times, 4), retryDelay = delay, onRetry } = config
     let __retryCount = 0
     const request = async () => {
       try {
         return await next(config)
       } catch (err) {
         // 判断是否进行重试
-        if (!retryTimes || __retryCount >= retryTimes) {
+        if (onRetry || !retryTimes || __retryCount >= retryTimes) {
+          delete config.onRetry
           return Promise.reject(err)
         }
         // 重复请求

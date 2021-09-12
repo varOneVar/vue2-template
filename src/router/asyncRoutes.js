@@ -1,10 +1,10 @@
 /*
  * @Author: Song Qing
  * @Date: 2021-06-17 11:10:36
- * @LastEditTime: 2021-06-24 13:29:11
+ * @LastEditTime: 2021-09-12 20:51:51
  * @LastEditor: Song Qing
  * @Description: 权限路由，根据接口返回的角色做处理
- * @FilePath: \mobile-vue-vant\app-test\src\router\asyncRoutes.js
+ * @FilePath: \vue2-template\src\router\asyncRoutes.js
  */
 
 import Layout from '@/layout'
@@ -19,7 +19,8 @@ export default [
     children: [
       {
         path: 'home',
-        component: () => import('@/views/workbench/FChanrts')
+        component: () => import('@/views/workbench/MyHome'),
+        meta: { title: '首页' }
       }
     ]
   }

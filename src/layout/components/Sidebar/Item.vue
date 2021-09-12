@@ -10,7 +10,6 @@ export default {
   },
   render(h, context) {
     const { title } = context.props
-    console.log('title', title)
     const vnodes = []
     if (title) {
       vnodes.push(<span slot="title">{title}</span>)

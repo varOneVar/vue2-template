@@ -32,7 +32,7 @@ export default {
     }),
     ...mapGetters(['hiddenOther', 'isMinScreen']),
     siderBarWidth() {
-      return this.sidebar.opened ? 210 : 60
+      return this.sidebar.opened ? 210 : 64
     },
     classObj() {
       return {

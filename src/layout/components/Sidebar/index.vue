@@ -52,11 +52,11 @@ export default {
       }
       return path
     },
-    menuList({ accessedRoutes }) {
+    menuList({ accessedRoutes, resolvePath }) {
       const fn = (arr, basePath) => {
         const res = arr.reduce((t, c) => {
           if (!c.path.startsWith('/')) {
-            c.path = this.resolvePath(basePath, c.path)
+            c.path = resolvePath(basePath, c.path)
           }
           if (c.children) {
             const Arr = c.children.filter((it) => !it.hidden)
@@ -64,7 +64,7 @@ export default {
               if (Arr.length === 1) {
                 const item = Arr[0]
                 if (!item.path.startsWith('/')) {
-                  item.path = this.resolvePath(c.path, item.path)
+                  item.path = resolvePath(c.path, item.path)
                 }
                 if (item.children) {
                   item.children = fn(item.children, item.path)

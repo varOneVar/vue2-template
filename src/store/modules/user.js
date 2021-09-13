@@ -6,7 +6,6 @@
  * @Description: 用户登录相关
  * @FilePath: \vue2-template\vue2-template\src\store\modules\user.js
  */
-import { Message } from 'element-ui'
 import { apiUseLogin, apiUseLogout } from '@/api/jobs/user'
 import { goLoginPortal } from '@/utils/client-info'
 import { encrypt } from '@/utils/crypto'
@@ -48,7 +47,7 @@ const actions = {
     commit('CLEAR_USER_DATA')
     storage.remove(SESSION_KEY.checkToken) // 清除超时检测
     goLoginPortal() // 重新前往登录页
-    Message.success('退出成功！')
+    // 提示
   },
   // 登出
   async loginOutByToken({ dispatch, state }) {
@@ -59,7 +58,7 @@ const actions = {
       if (code === '0') {
         dispatch('ganSuiTamen')
       } else {
-        Message.error('退出失败！')
+        // 提示
       }
     } catch (error) {
       console.log(error)
@@ -76,7 +75,7 @@ const actions = {
         commit('CHANGE_USER_INFO', result)
         commit('CHANGE_TOKEN', result.token)
       } else {
-        Message.error(message || '登录失败！')
+        // 提示
       }
     } catch (error) {
       console.log(error)

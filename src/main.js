@@ -7,7 +7,6 @@ import App from '@/App.vue'
 
 // 样式
 import 'normalize.css/normalize.css'
-import '@/styles/element-variables.scss'
 import '@/styles/index.scss'
 
 // 给vue原型上绑方法

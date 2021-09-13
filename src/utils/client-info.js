@@ -7,7 +7,6 @@
  * @FilePath: \mobile-vue-vant\app-test\src\utils\client-info.js
  */
 import { v4 as uuidV4 } from 'uuid'
-import { MessageBox } from 'element-ui'
 import settings from '@/settings'
 import store from '@/store'
 import router from '@/router'
@@ -41,12 +40,7 @@ export function failDispose({ content, msgType = 'warning', isShowMsg = true }) 
     store.dispatch('user/ganSuiTamen')
   }
   if (isShowMsg) {
-    MessageBox.alert(content, '提示', {
-      confirmButtonText: '确定',
-      showClose: false,
-      type: msgType,
-      callback: fn
-    })
+// 弹窗
   } else {
     fn()
   }

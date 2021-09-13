@@ -1,6 +1,5 @@
 import axios from 'axios'
 import qs from 'query-string'
-import { Message } from 'element-ui'
 
 import store from '@/store'
 import { getClientInfo, checkTimeout, failDispose } from '@/utils'
@@ -74,11 +73,6 @@ function createService() {
     (error) => {
       console.log('请求异常', error)
       // TODO: 错误弹窗
-      Message({
-        message: `请求异常 ${error.message}`,
-        type: 'error',
-        duration: 3 * 1000
-      })
       return Promise.reject(error)
     }
   )
@@ -109,11 +103,7 @@ function createService() {
       }
       // 异常code处理
       if (code !== SUCCESS_CODE) {
-        Message({
-          message: getMessage(code, message || '请求失败！'),
-          type: 'error',
-          duration: 3 * 1000
-        })
+      // 提示
         return data
       }
       return data
@@ -131,11 +121,6 @@ function createService() {
       }
       if (code !== null) {
         // TODO: 错误弹窗
-        Message({
-          message: `网络开小差(${code})`,
-          type: 'error',
-          duration: 3 * 1000
-        })
       }
       return Promise.reject(error)
     }

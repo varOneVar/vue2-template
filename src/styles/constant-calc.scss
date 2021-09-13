@@ -1,4 +1,3 @@
-// @import './element-variables.scss';
 // https://www.sassmeister.com/ 不清楚的在这个在线网站上可以看到转换后的样式
 
 // 循环出7个尺寸百分比布局 例：grid-col-4
@@ -94,9 +93,9 @@ $textAlign: left, right, center;
 
 // 颜色，例：c-red, bg-red
 $colorType: (
-  red: $--color-danger,
-  blue: $--color-primary,
-  gray: $--color-info
+  red: #f44336,
+  blue: #0071ce,
+  gray: #e6e6e6
 );
 
 @each $key, $value in $colorType {

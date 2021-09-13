@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <router-view v-loading="wholePageLoading" />
+    <router-view />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import device from 'current-device'
 
 export default {
@@ -43,9 +43,6 @@ export default {
   },
   created() {
     this.initHandler()
-  },
-  computed: {
-    ...mapGetters(['wholePageLoading'])
   }
 }
 </script>

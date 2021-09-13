@@ -1,7 +1,4 @@
 export default {
-  sidebar: (state) => state.app.sidebar,
-  device: (state) => state.app.device,
-  hiddenOther: (state) => state.app.hiddenOther,
   storeId: (state) => state.user.storeId,
   userId: (state) => (state.user.userInfo || {}).userId,
   appId: (state) => state.user.appId,
@@ -11,7 +8,5 @@ export default {
   roles: (state) => state.user.roles,
   hasAuth: (state) => (needRoles) => needRoles.some((v) => state.user.roles.includes(v)),
   userName: (state) => (state.user.userInfo || {}).userName,
-  accessedRoutes: (state) => state.user.accessedRoutes,
-  isMinScreen: (state) => state.app.isMinScreen,
-  wholePageLoading: (state) => state.app.wholePageLoading
+  accessedRoutes: (state) => state.user.accessedRoutes
 }

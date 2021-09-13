@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import ElementUI from 'element-ui'
 import store from '@/store'
 import router from '@/router'
 import directives from '@/directives'
@@ -17,9 +16,6 @@ import global from './global'
 Vue.use(global)
 Vue.use(directives) // 注册全局指令
 Vue.use(filters) // 注册全局过滤器
-Vue.use(ElementUI, {
-  size: 'small'
-})
 
 Vue.config.productionTip = false
 

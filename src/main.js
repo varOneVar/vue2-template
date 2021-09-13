@@ -3,6 +3,7 @@ import store from '@/store'
 import router from '@/router'
 import directives from '@/directives'
 import filters from '@/filters'
+import plugins from '@/plugins'
 import App from '@/App.vue'
 
 // 样式
@@ -15,6 +16,7 @@ import global from './global'
 Vue.use(global)
 Vue.use(directives) // 注册全局指令
 Vue.use(filters) // 注册全局过滤器
+Vue.use(plugins)
 
 Vue.config.productionTip = false
 

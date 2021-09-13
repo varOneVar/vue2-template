@@ -9,15 +9,24 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: process.env.NODE_ENV !== 'production', // 生产环境的SourceMap
   // CSS 相关选项
-  // css: {
-  //   // // 为预处理器的 loader 传递自定义选项。比如传递给
-  //   // // sass-loader 时，使用 `{ sass: { ... } }`。
-  //   loaderOptions: {
-  //     scss: {
-  //       additionalData: `@import "~@/styles/element-variables.scss";`
-  //     }
-  //   }
-  // },
+  css: {
+    // // 为预处理器的 loader 传递自定义选项。比如传递给
+    // // sass-loader 时，使用 `{ sass: { ... } }`。
+    loaderOptions: {
+     less: {
+        // 若 less-loader 版本小于 6.0，请移除 lessOptions 这一级，直接配置选项。
+        lessOptions: {
+          modifyVars: {
+            // 直接覆盖变量
+            'text-color': '#111',
+            'border-color': '#eee',
+            // 或者可以通过 less 文件覆盖（文件路径为绝对路径）
+            hack: `true; @import "./src/styles/vant-less.less";`,
+          },
+        }
+      }
+    }
+  },
 
   // arallel: require('os').cpus().length > 1,
 

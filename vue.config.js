@@ -1,4 +1,5 @@
 const StyleLintPlugin = require('stylelint-webpack-plugin')
+const path = require('path')
 const { name } = require('./package.json')
 const mockApi = require('./src/mock/index.js')
 
@@ -13,6 +14,9 @@ module.exports = {
   //   // // 为预处理器的 loader 传递自定义选项。比如传递给
   //   // // sass-loader 时，使用 `{ sass: { ... } }`。
   //   loaderOptions: {
+  //     sass: {
+  //       additionalData: `@import "~@/styles/element-variables.scss";`
+  //     },
   //     scss: {
   //       additionalData: `@import "~@/styles/element-variables.scss";`
   //     }
@@ -67,18 +71,19 @@ module.exports = {
     const oneOfsMap = config.module.rule('scss').oneOfs.store
     oneOfsMap.forEach((item) => {
       item
-        .use('sass-resources-loader')
-        .loader('sass-resources-loader')
+        .use('style-resource')
+        .loader('style-resources-loader')
         .options({
-          // 全局变量文件路径，支持string和array，全局文件无需引入变量文件即可使用变量
-          resources: ['./src/styles/element-variables.scss', './src/styles/mixin.scss']
+          patterns: [
+            path.resolve(__dirname, './src/styles/element-variables.scss')
+          ]
         })
         .end()
     })
     config.plugin('stylelint').use(StyleLintPlugin, [
       {
         // 指定检测的文件
-        files: ['./src/**/*.{vue,css,less,scss,styl}'],
+        files: ['./src/**/*.{vue,css,less,scss}'],
         // 启动自动修复
         fix: true,
         cache: true // 启用缓存

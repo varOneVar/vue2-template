@@ -28,6 +28,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/styles/mixin.scss';
+
 .app-main {
   position: relative;
   width: 100%;

@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/styles/mixin.scss';
 .app-wrapper {
   height: 100%;
   overflow: hidden;
